@@ -1,1 +1,63 @@
+import numpy as np
 
+# Modelo de error de la prueba diagnóstica
+# Filas: resultado de la prueba (Tiene sepsis, No tiene)
+# Columnas: diagnóstico real (Tiene sepsis, No tiene)
+diagnostic_model = np.array([[0.95, 0.05],
+                              [0.05, 0.95]])
+print("Modelo diagnóstico:")
+print(diagnostic_model)
+
+Modelo diagnóstico:
+[[0.95 0.05]
+ [0.05 0.95]]
+
+# Índices para mayor claridad en el código
+quantities = np.array([1,99])
+print("Distribución de pacientes:", quantities)
+
+Distribución de pacientes: [ 1 99]
+
+# Verosimilitud
+# ¿Qué tan probable es que la prueba diga que si 
+# tiene sepsis cuando realmente lo tiene?
+p_read_given = diagnostic_model[0][0]
+print(f"Verosimilitud p(Z=M | X=M) = {p_read_given}")
+
+Verosimilitud p(Z=M | X=M) = 0.95
+
+# Prior
+# ¿Qué fracción de los pacientes tiene sepsis?
+p_is = quantities[0] / sum(quantities)
+print(f"Prior p(X=M) = {p_is}")
+
+Prior p(X=M) = 0.01
+
+# Normalizador
+# ¿Cuál es la probabilidad total de que la prueba indique sepsis, 
+# considerando todos los tipos posibles?
+# Vector de verosimilitudes: fila M del modelo
+p_likelihoods = diagnostic_model[0]
+print(f"Verosimilitudes p(Z=M | X=x): {p_likelihoods}")
+# Vector de priors
+p_isType = quantities / sum(quantities)
+print(f"Priors p(X=x): {p_isType}")
+# Normalizador
+p_read = np.dot(p_likelihoods, p_isType)
+print(f"\nNormalizador p(Z=M) = {p_read}")
+
+Verosimilitudes p(Z=M | X=x): [0.95 0.05]
+Priors p(X=x): [0.01 0.99]
+
+Normalizador p(Z=M) = 0.059000000000000004
+
+# Posterior
+p_is_givenRead = p_read_given * p_is / p_read
+print(f"Posterior p(X=M | Z=M) = {p_is_givenRead}")
+
+Posterior p(X=M | Z=M) = 0.16101694915254236
+
+Interpretación:
+Si la prueba indica Sepsis, la probabilidad de que el paciente tenga esta enfermedad es de 16%. 
+A pesar de que la verosimilitud es muy alta (95%), los casos son muy pocos en este hospital (0.01).
+Por ello la probabilidad es muy baja en este caso.
