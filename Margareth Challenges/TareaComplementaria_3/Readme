@@ -1,1 +1,96 @@
+Problema 1. SVM de margen blando y efecto del parámetro 𝑪 
+En problemas reales de reconocimiento de patrones biomédicos, las clases no siempre son 
+perfectamente separables. Puede existir ruido, solapamiento entre clases, mediciones imprecisas 
+o pacientes atípicos. Para manejar esta situación, el SVM de margen blando (soft-margin SVM) 
+introduce variables de holgura 𝜉y un parámetro 𝐶, que controla el compromiso entre maximizar 
+el margen y penalizar errores de clasificación. 
+El problema de optimización del soft-margin SVM puede escribirse como: 
 
+Suponga que se desea clasificar dos clases biomédicas, por ejemplo, latidos normales vs. latidos
+anómalos, usando un clasificador SVM de margen blando
+
+a) Explique con sus propias palabras cuál es el papel del parámetro 𝐶 en un SVM de margen 
+blando. 
+-> Cuando se realiza el margen, van a existir violaciones, estas deben ser penalizadas de manera que 
+acepte algunos errores pero que no sea tan flexible. Por ello le da pesos a estas violaciones
+del margen
+
+b) Justifique por qué debe cumplirse que 𝐶>0. 
+¿Qué ocurriría si 𝐶=0? Analice la función objetivo e interprete la solución obtenida desde el 
+punto de vista de clasificación y generalización.
+
+-> Siempre debe ser positivo ya que los errores van a afectar y generar cambios.
+Si C=0, la suma de las variables de holgura tambien sería 0, quitanto por completo estas
+violaciones del margen. Se ignorarián datos que son más complicados de clasificar, y por 
+ende, los más importantes para que el modelo aprenda. Afectando por completo la frontera de decisión.
+
+c) Describa conceptualmente qué efecto tendría usar: 
+• un valor de 𝐶muy grande,  
+• un valor de 𝐶muy pequeño,  
+sobre la frontera de decisión y el riesgo de overfitting.
+
+-> Un C grande penaliza de mayor manera los errores y violaciones, no tiene mucha tolerancia
+es una frontera más rígida, puede generar overfitting. Va a memorizar los datos más que generalizar
+Un C más pequeño no los penaliza tanto, por lo que hay mayor violaciones del margen, siendo
+una frontera más flexible, baja el riesgo de overfitting pero sube el de underfitting
+
+d) Interprete su respuesta en un contexto biomédico. Por ejemplo, explique qué podría ocurrir si 
+se intenta clasificar pacientes a partir de señales ECG ruidosas o con outliers clínicos usando un 
+valor de 𝐶excesivamente grande. 
+
+->Si C es muy grande, va a empezar a memorizar los errores y no a generalizar. La frontera va a 
+moverse para adaptarse y ya no funcionaría de buena manera.
+
+e) Relacione el parámetro 𝐶con los conceptos de: 
+• regularización,  -> C es inverso a la regularización
+• complejidad del modelo,  -> C es proporcional, el modelo se volvería más sensible al aumentar C
+• margen,  -> C es inverso, al subir se estrecha el margen
+• capacidad de generalización -> C no debe ser extremo, más cercano a inverso
+
+Problema 2. Kernel trick, espacio de características y overfitting 
+En reconocimiento de patrones, muchas veces las clases no pueden separarse linealmente en el 
+espacio original de características. En esos casos, un SVM puede trabajar en un espacio 
+transformado de mayor dimensión mediante una función 𝜙(𝑥). El kernel trick permite calcular 
+productos internos en ese espacio sin construirlo explícitamente. 
+Considere la siguiente transformación de características de dimensión infinita, asociada a una 
+representación no lineal de una variable biomédica escalar 𝑥: 
+
+Suponga que 𝑥y 𝑦representan una característica biomédica, por ejemplo una medida extraída de 
+EEG, EMG o una variable clínica preprocesada. 
+Preguntas 
+a) Explique por qué no resulta práctico trabajar de manera explícita con una transformación de 
+dimensión infinita en un problema real de reconocimiento de patrones. 
+
+->  No es práctico primero por la capacidad de cómputo, además, por que los datos se dispersarían
+
+b) Defina el kernel asociado como el producto interno en el espacio transformado: 
+y obtenga su forma explícita. 
+
+-> 
+
+c) Interprete el resultado anterior y explique cómo el kernel trick permite construir un 
+clasificador no lineal sin calcular explícitamente 𝜙(𝑥). 
+
+-> Ya que solo depende de los productos internos, se podría trabajar en un espacio finito.
+
+d) Discuta si trabajar con un espacio de características tan grande implica necesariamente 
+overfitting. Relacione su respuesta con los conceptos de: 
+• generalización,  
+• complejidad del modelo,  
+• regularización,  
+• elección adecuada de hiperparámetros.  
+
+->No necesariamente implica overfitting, el SVM minimiza w^2, lo que logra mantener el modelo
+simple. Además, al maximizar el margen, se logra una solución más robusta.
+
+
+e) Dé un ejemplo biomédico donde un clasificador lineal podría ser insuficiente y donde un 
+kernel no lineal podría capturar mejor la estructura de los datos. 
+
+->
+
+f) Compare brevemente el uso de un SVM lineal frente a un SVM con kernel en términos de: 
+• flexibilidad,  
+• interpretabilidad,  
+• riesgo de sobreajuste,  
+• aplicación en señales o datos biomédicos.
