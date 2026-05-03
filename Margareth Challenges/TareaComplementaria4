@@ -1,1 +1,17 @@
+Bagging, Random Forest y varianza del ensamble
+Un hospital universitario desea mejorar la detección automática de arritmias cardíacas a partir de
+características extraídas de señales ECG. Para ello, se plantea el uso de métodos de ensamble
+basados en árboles de decisión. Antes de implementar el sistema, el equipo de ingeniería
+biomédica necesita entender los fundamentos del bagging, su relación con Random Forest y su
+efecto sobre la varianza del modelo.
 
+a) Explique cuál es la idea central del bagging. ¿En qué se diferencia conceptualmente del
+boosting? Mencione al menos dos diferencias en términos de entrenamiento, objetivo y
+riesgo principal de cada método.
+
+La idea central del bagging es entrenador varios modelos de forma independiente y sacarles el promedio,
+pero estos modelos deben ser para distintos subconjuntos de datos.
+Se diferencia con el boosting por que los datos y errores anteriores no afectan el entrenamiento
+del nuevo subconjunto, son en paralelos, no consecutivos.
+|Bagging:  |
+|Boosting: |
