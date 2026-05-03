@@ -13,5 +13,7 @@ La idea central del bagging es entrenador varios modelos de forma independiente 
 pero estos modelos deben ser para distintos subconjuntos de datos.
 Se diferencia con el boosting por que los datos y errores anteriores no afectan el entrenamiento
 del nuevo subconjunto, son en paralelos, no consecutivos.
-|Bagging:  |
-|Boosting: |
+|          | Objetivos      |Riesgo                 |
+|----------|----------------|-----------------------|
+|Bagging:  |reducir varianza|Simple -> no mejora    |
+|Boosting: |reducir sesgo   |Descontrol->overfitting|
