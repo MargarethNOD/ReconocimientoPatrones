@@ -5,10 +5,7 @@ basados en árboles de decisión. Antes de implementar el sistema, el equipo de 
 biomédica necesita entender los fundamentos del bagging, su relación con Random Forest y su
 efecto sobre la varianza del modelo.
 
-a) Explique cuál es la idea central del bagging. ¿En qué se diferencia conceptualmente del
-boosting? Mencione al menos dos diferencias en términos de entrenamiento, objetivo y
-riesgo principal de cada método.
-
+a) 
 La idea central del bagging es entrenador varios modelos de forma independiente y sacarles el promedio,
 pero estos modelos deben ser para distintos subconjuntos de datos.
 Se diferencia con el boosting por que los datos y errores anteriores no afectan el entrenamiento
@@ -17,3 +14,32 @@ del nuevo subconjunto, son en paralelos, no consecutivos.
 |----------|----------------|-----------------------|
 |Bagging:  |reducir varianza|Simple -> no mejora    |
 |Boosting: |reducir sesgo   |Descontrol->overfitting|
+
+b)
+
+El bagging reduce principalmente la varianza, el sesgo no se ve afectado ya
+que al promediar los sesgos, este casi se mantiene igual, pero la varianza si disminuye.
+
+Al m ser muy grande, ese factor se hace muy pequeño, por lo que queda p*sigma^2, por lo que la
+varianza ya no disminuye y se limita. Al añadir tantos predictores (o árboles) ya no se esta 
+mejorando el modelo.
+
+Si 𝜌 es muy alto, (-𝜌) toma todo el primer término y luego este se neutraliza, quedando solo
+sigma^2. Si 𝜌 es muy alto, los árboles son muy similares, por lo que promediar los resultados
+no daría mucha información nueva y relevante.
+
+Si los valores 𝜌 y de varianza con al azar, estos pueden ser muy grandes y terminan generando
+los errores antes mencionados.
+
+En vez de que el subconjunto a trabajar sea elegido al azar, se elige entre raiz(𝜌).
+Obliga al modelo a utilizar variables distintas en cada entrenamiento y pueda generalizar 
+de mejor manera.
+
+c) 
+Los datos que han quedado fuera de la bolsa sirven para la validación, son comparados
+y los errores hallados son promediados. Se puede utilizar ya que es insesgada
+
+d)
+La propabilidad de 0.368 indica la probabilidad de que una muestra sea elegida en el
+subgrupo
+
